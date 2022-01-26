@@ -60,3 +60,11 @@ GROUP BY teachers.name, teachers.surname
 
 7. BONUS: Selezionare per ogni studente quanti tentativi d’esame ha sostenuto per superare ciascuno dei suoi esami
 
+SELECT students.name, students.surname, courses.name as `nome_corso`, COUNT(exam_student.vote) as `tentativi` FROM `students`
+INNER JOIN exam_student
+ON exam_student.student_id = students.id
+INNER JOIN exams
+ON exams.id = exam_student.exam_id
+INNER JOIN courses
+ON courses.id = exams.course_id
+GROUP BY students.name, students.surname, courses.name
